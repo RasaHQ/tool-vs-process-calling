@@ -1,0 +1,95 @@
+version: "3.1"
+
+actions:
+  - get_flight_options
+  - validate_passport_format
+  - check_passport_expiry_status
+  - get_country_entry_requirements
+  - get_visa_requirements
+
+slots:
+  source_city:
+    type: text
+    mappings:
+      - type: from_llm
+  destination_city:
+    type: text
+    mappings:
+      - type: from_llm
+  date_of_travel:
+    type: text
+    mappings:
+      - type: from_llm
+  chosen_flight_id:
+    type: text
+    mappings:
+      - type: from_llm
+  passenger_name:
+    type: text
+    mappings:
+      - type: from_llm
+  passenger_age:
+    type: float
+    mappings:
+      - type: from_llm
+  passenger_passport_id:
+    type: text
+    mappings:
+      - type: from_llm
+  passenger_nationality:
+    type: categorical
+    values:
+      - India
+      - United States
+      - Germany
+      - France
+    mappings:
+      - type: from_llm
+  passport_validity:
+    type: bool
+    mappings:
+      - type: controlled
+  passport_not_expired:
+    type: bool
+    mappings:
+      - type: controlled
+  flight_options:
+    type: text
+    mappings:
+      - type: controlled
+  flight_options_readable:
+    type: text
+    mappings:
+      - type: controlled
+  country_entry_requirements:
+    type: text
+    mappings:
+      - type: controlled
+  visa_requirements:
+    type: text
+    mappings:
+      - type: controlled
+
+responses:
+  utter_country_entry_reqs:
+    - text: "Your destination country has the following travel guidelines: {country_entry_requirements}"
+  utter_visa_reqs:
+    - text: "Your destination country has the following visa requirements: {visa_requirements}"
+  utter_show_flight_options:
+    - text: "Here are some flight options for you: \n\n {flight_options_readable}"
+  utter_ask_source_city:
+    - text: Which city will you depart from?
+  utter_ask_destination_city:
+    - text: Which city to do you want to go to?
+  utter_ask_date_of_travel:
+    - text: When do you want to travel?
+  utter_ask_chosen_flight_id:
+    - text: Which flight option do you prefer?
+  utter_ask_passenger_name:
+    - text: Please enter the passenger's full name
+  utter_ask_passenger_age:
+    - text: Please enter the passenger's age
+  utter_ask_passenger_passport_id:
+    - text: Please enter your passport number
+  utter_ask_passenger_nationality:
+    - text: What's your nationality?

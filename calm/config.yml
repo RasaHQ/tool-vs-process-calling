@@ -1,0 +1,18 @@
+# The config recipe.
+recipe: default.v1
+
+# The assistant project unique identifier
+# This default value must be replaced with a unique assistant name within your deployment
+assistant_id: 20250816-165242-wooden-patch
+
+language: en
+pipeline:
+- name: CompactLLMCommandGenerator
+  llm:
+    model_group: openai-gpt-4o
+  flow_retrieval:
+    active: false
+
+# Configuration for Rasa Core.
+policies:
+- name: FlowPolicy

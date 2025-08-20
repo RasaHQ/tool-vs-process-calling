@@ -1,0 +1,23 @@
+flows:
+  book_flight:
+    description: help user make a new flight booking
+    steps:
+      - collect: source_city
+      - collect: destination_city
+      - collect: date_of_travel
+        description: Date of travel in dd/mm/yyyy format. Current date is 20/08/2025 and its a Wednesday!
+      - action: get_flight_options
+      - action: utter_show_flight_options
+      - collect: chosen_flight_id
+        description: ID of the flight option that user chooses. Should always be one of the flight IDs shown to the user.
+      - collect: passenger_name
+      - collect: passenger_age
+      - collect: passenger_passport_id
+      - collect: passenger_nationality
+      - action: validate_passport_format
+      - action: check_passport_expiry_status
+      - action: get_country_entry_requirements
+      - action: utter_country_entry_reqs
+      - action: get_visa_requirements
+      - action: utter_visa_reqs
+

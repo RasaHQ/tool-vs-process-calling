@@ -1,0 +1,23 @@
+flows:
+  cancel_flight:
+    description: help user cancel their existing flight booking
+    steps:
+      - collect: booking_id
+      - action: get_booking_details
+      - action: utter_booking_details
+      - action: get_fare_rules
+      - action: utter_general_fare_rules
+      - action: calculate_cancellation_fee
+      - action: check_loyalty_status
+      - action: utter_loyalty_rebate
+      - action: apply_loyalty_discount
+      - action: utter_refund_details
+#      - collect: user_confirmation
+#        next:
+#          - if: slots.user_confirmation is True
+#            then:
+#              - action: process_refund
+#            else:
+#              - action: utter_not_cancelled
+
+
