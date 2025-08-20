@@ -138,4 +138,6 @@ rasa inspect
 
 You should be able to have a conversation similar to this - 
 
-![](assets/calm_demo.mov)
+https://github.com/user-attachments/assets/b7ec7ef3-957d-410d-aef5-9d628410be4f
+
+
