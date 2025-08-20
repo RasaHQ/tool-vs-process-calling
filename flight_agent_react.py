@@ -513,98 +513,6 @@ Always use tools rather than guessing or providing outdated information."""
         return response_text
 
 
-# =============================================================================
-# DEMO CONVERSATION
-# =============================================================================
-
-def run_real_conversation_demo():
-    """Run the conversation with real LLM"""
-
-    # Check for API key
-    if not os.getenv("OPENAI_API_KEY"):
-        print("❌ Please set your OPENAI_API_KEY environment variable")
-        print("   export OPENAI_API_KEY='your-api-key-here'")
-        return
-
-    agent = RealLLMTravelAgent()
-
-    print("=" * 80)
-    print("REAL LLM TRAVEL AGENT DEMO")
-    print("Choose conversation scenario:")
-    print("1. Flight Booking (Direct but with Mid-Flow Changes)")
-    print("2. Flight Cancellation with Loyalty Benefits")
-    print("=" * 80)
-
-    choice = input("Enter choice (1 or 2): ").strip()
-
-    if choice == "1":
-        print("\n" + "=" * 60)
-        print("CONVERSATION 1: FLIGHT BOOKING")
-        print("=" * 60)
-
-        # Original booking conversation
-        messages = [
-            "I need to book a flight from New York to Paris for 2 people leaving March 15th and returning March 22nd.",
-            # "Actually, wait. I just realized one passenger is my 85-year-old grandmother. Does that change anything?",
-            "Okay, first passenger is John Smith, DOB 1985-05-15, passport US123456789. Second passenger is Mary Smith, DOB 1939-03-20, passport US987654321.",
-            # "Actually, before payment, can you also book hotels in Paris? I want to handle everything together.",
-            "Credit card 4532123456789012, expiry 12/25, CVV 123."
-        ]
-
-    elif choice == "2":
-        print("\n" + "=" * 60)
-        print("CONVERSATION 2: FLIGHT CANCELLATION")
-        print("=" * 60)
-
-        # Cancellation conversation showcasing complex business logic
-        messages = [
-            "I need to cancel my flight booking. My reference is CONF123456 and my last name is Smith.",
-            "I want to cancel both flights - the outbound and return. Can you tell me what the fees will be?",
-            "Actually, I'm a platinum member. My member ID is PLT123456. Does that help with the fees?",
-            "What if I take the refund as points instead of cash? I heard there might be some benefit.",
-            "Yes, I'll take the points option. Please process the cancellation."
-        ]
-
-        print("This conversation tests complex cancellation business logic:")
-        print("• Authentication with booking ref + passenger name")
-        print("• Flight selection for multi-leg bookings")
-        print("• Cancellation fee calculation based on timing")
-        print("• Loyalty status check for fee waivers (Platinum = waiver)")
-        print("• Points refund option with 5% penalty reduction")
-        print("• Proper refund processing and confirmation")
-
-    else:
-        print("Invalid choice")
-        return
-
-    for i, message in enumerate(messages, 1):
-        print(f"\n{'=' * 60}")
-        print(f"CONVERSATION TURN {i}")
-        print(f"{'=' * 60}")
-
-        try:
-            agent.react_loop(message)
-        except Exception as e:
-            print(f"❌ Error: {e}")
-            print("This might be due to API rate limits or connectivity issues")
-
-        # Pause between turns
-        input("\nPress Enter to continue to next turn...")
-
-    print(f"\n{'=' * 80}")
-    print("DEMO COMPLETE")
-    print("\nObserve how the real LLM:")
-    print("✅ Makes intelligent decisions about which tools to call")
-    print("✅ Can call multiple tools in sequence")
-    print("❌ But still loses context between conversation turns")
-    print("❌ And doesn't enforce business process requirements")
-    print("❌ May skip important validation steps")
-    if choice == "2":
-        print("❌ May not follow proper cancellation authentication flow")
-        print("❌ Could bypass loyalty status checks or points calculation")
-    print("=" * 80)
-
-
 # Interactive mode
 def interactive_mode():
     """Run in interactive mode for testing"""
@@ -629,15 +537,4 @@ def interactive_mode():
 
 
 if __name__ == "__main__":
-    print("Choose mode:")
-    print("1. Run demo conversations (booking & cancellation)")
-    print("2. Interactive mode")
-
-    choice = input("Enter choice (1 or 2): ").strip()
-
-    if choice == "1":
-        run_real_conversation_demo()
-    elif choice == "2":
-        interactive_mode()
-    else:
-        print("Invalid choice")
+    interactive_mode()
