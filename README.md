@@ -2,6 +2,9 @@
 
 This repository contains the demo showcased during the hack session - "Building Fast & Accurate Conversational Agents: Beyond Function Calling"
 
+**Please note that none of the conversational agents given in the repository are meant to be production-ready agents but are only meant to convey an idea of how process calling is a better abstraction than tool calling if you are building customer facing conversational agents**
+
+
 ## Setting up the repository
 
 1. Once you have cloned the repository, create a new virtual environment with conda (anaconda / miniconda) - 
@@ -24,6 +27,61 @@ uv pip install openai==1.68.2
 uv pip install rasa-pro==3.13.7
 uv pip install jupyter==1.0.0
 ```
+
+## Process Calling Demo
+
+Process calling is an approach where state and context is added to conversational agents while still being able to use
+atomic tools. You can read more about it from [rasa's blog post](https://rasa.com/blog/process-calling-agentic-tools-need-state/)
+
+### Setting up the demo
+
+1. Ensure you have setup the repository with all dependencies installed as explained in [this section](#setting-up-the-repository)
+
+2. Fetch your free [Rasa Pro Developer Edition license key](https://rasa.com/rasa-pro-developer-edition-license-key-request/)
+
+### Running the demo
+
+1. Set your rasa pro developer edition license key to an env var - 
+
+```shell
+export RASA_PRO_LICENSE=<your-rasa-pro-license>
+```
+
+2. Ensure you have access to an API key for the OpenAI platform. Set it as an env var -
+
+```shell
+export OPENAI_API_KEY=<your-api-key>
+```
+
+3. Navigate to the assistant directory - 
+
+```
+cd calm/
+```
+
+4. Train the assistant - 
+
+```
+rasa train
+```
+
+5. Talk to the assistant - 
+
+```
+rasa inspect
+```
+
+You should be able to have a conversation similar to this - 
+
+https://github.com/user-attachments/assets/b7ec7ef3-957d-410d-aef5-9d628410be4f
+
+
+As shown, the conversation always follows the prescribed business logic but also has the flexibility to jump around
+in the pre-scripted process when the user changes their mind about something. You can yourself try digressing from 
+cancelling a flight booking to making a new flight booking or vice-versa, and it should be able to do it seamlessly.
+
+If you are interested in learning more about CALM, checkout the [docs here](https://rasa.com/docs/learn/concepts/calm/)
+
 
 ## Tool calling demo
 
@@ -91,53 +149,3 @@ The issue in the above conversation is that the agent was explicitly told in the
 because it missed to do so, it incorrectly calculates the cancellation fee.
 
 Follow along in the demo, to see how this ends up being a game of 'prompt and pray' in order to get some reliability with this approach.
-
-
-## Process Calling Demo
-
-Process calling is an approach where state and context is added to conversational agents while being able to use
-atomic tools. You can read more about it from [rasa's blog post](https://rasa.com/blog/process-calling-agentic-tools-need-state/)
-
-### Setting up the demo
-
-1. Ensure you have setup the repository with all dependencies installed as explained in [this section](#setting-up-the-repository)
-
-2. Fetch your free [Rasa Pro Developer Edition license key](https://rasa.com/rasa-pro-developer-edition-license-key-request/)
-
-### Running the demo
-
-1. Set your rasa pro developer edition license key to an env var - 
-
-```shell
-export RASA_PRO_LICENSE=<your-rasa-pro-license>
-```
-
-2. Ensure you have access to an API key for the OpenAI platform. Set it as an env var -
-
-```shell
-export OPENAI_API_KEY=<your-api-key>
-```
-
-3. Navigate to the assistant directory - 
-
-```
-cd calm/
-```
-
-4. Train the assistant - 
-
-```
-rasa train
-```
-
-5. Talk to the assistant - 
-
-```
-rasa inspect
-```
-
-You should be able to have a conversation similar to this - 
-
-https://github.com/user-attachments/assets/b7ec7ef3-957d-410d-aef5-9d628410be4f
-
-
