@@ -16,6 +16,8 @@ slots:
     type: text
     mappings:
       - type: controlled
+  confirmation_correct_booking:
+    type: bool
   booking_details_readable:
     type: text
     mappings:
@@ -36,63 +38,9 @@ slots:
     type: text
     mappings:
       - type: controlled
-#  destination_city:
-#    type: text
-#    mappings:
-#      - type: from_llm
-#  date_of_travel:
-#    type: text
-#    mappings:
-#      - type: from_llm
-#  chosen_flight_id:
-#    type: text
-#    mappings:
-#      - type: from_llm
-#  passenger_name:
-#    type: text
-#    mappings:
-#      - type: from_llm
-#  passenger_age:
-#    type: float
-#    mappings:
-#      - type: from_llm
-#  passenger_passport_id:
-#    type: text
-#    mappings:
-#      - type: from_llm
-#  passenger_nationality:
-#    type: categorical
-#    values:
-#      - India
-#      - United States
-#      - Germany
-#      - France
-#    mappings:
-#      - type: from_llm
-#  passport_validity:
-#    type: bool
-#    mappings:
-#      - type: controlled
-#  passport_not_expired:
-#    type: bool
-#    mappings:
-#      - type: controlled
-#  flight_options:
-#    type: text
-#    mappings:
-#      - type: controlled
-#  flight_options_readable:
-#    type: text
-#    mappings:
-#      - type: controlled
-#  country_entry_requirements:
-#    type: text
-#    mappings:
-#      - type: controlled
-#  visa_requirements:
-#    type: text
-#    mappings:
-#      - type: controlled
+  confirm_cancellation:
+    type: bool
+
 
 responses:
   utter_ask_booking_id:
@@ -107,6 +55,14 @@ responses:
     - text: "Here is your refund summary: {cancellation_fee_details}"
   utter_refund_details:
     - text: "Here is final refund summary: {refund_details}"
+  utter_ask_confirmation_correct_booking:
+    - text: "Would you like me to start the cancellation process for the above booking?"
+  utter_stop_cancellation:
+    - text: "Alright, I'll stop the cancellation."
+  utter_ask_confirm_cancellation:
+    - text: "Would you like to proceed with the cancellation?"
+  utter_booking_cancelled:
+    - text: "Your booking {booking_id} has been cancelled and the refund will be processed within 5 working days."
 #  utter_country_entry_reqs:
 #    - text: "Your destination country has the following travel guidelines: {country_entry_requirements}"
 #  utter_visa_reqs:

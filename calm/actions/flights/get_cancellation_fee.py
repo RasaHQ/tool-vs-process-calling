@@ -18,8 +18,6 @@ class CalculateCancellationFee(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message("Calculating your cancellation fee based on the above...")
-
         booking_details = dict(tracker.get_slot("booking_details"))
         cancellation_date = datetime.now().strftime("%Y-%m-%d")
 

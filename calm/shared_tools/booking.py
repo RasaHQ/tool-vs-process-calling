@@ -172,11 +172,8 @@ class TravelTools:
     def get_booking_details(booking_reference: str) -> Dict:
         """Mock booking details retrieval"""
         print(f"📋 Retrieving booking details for: {booking_reference}")
-        return {
-            "booking_reference": booking_reference,
-            "status": "confirmed",
-            "passenger_count": 1,
-            "flight": {
+        if booking_reference == "CONF12345":
+            flight_details = {
                 "flight_id": "AA101",
                 "route": "NYC-PAR",
                 "date": "2025-09-15",
@@ -184,7 +181,22 @@ class TravelTools:
                 "fare_class": "Economy",
                 "price": 650.00,
                 "airline": "Delta"
-            },
+            }
+        elif booking_reference == "CONF98765":
+            flight_details = {
+                "flight_id": "AA102",
+                "route": "PAR-NYC",
+                "date": "2025-09-20",
+                "time": "02:00",
+                "fare_class": "Economy",
+                "price": 650.00,
+                "airline": "Delta"
+            }
+        return {
+            "booking_reference": booking_reference,
+            "status": "confirmed",
+            "passenger_count": 1,
+            "flight": flight_details,
             "total_paid": 650.00,
             "payment_method": "Visa ending in 9012",
             "booking_date": "2024-02-15",

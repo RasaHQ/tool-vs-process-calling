@@ -5,19 +5,32 @@ flows:
       - collect: booking_id
       - action: get_booking_details
       - action: utter_booking_details
-      - action: get_fare_rules
+      - collect: confirmation_correct_booking
+        description: user confirmation on whether they want to proceed with cancelling the shown flight booking
+        next:
+          - if: slots.confirmation_correct_booking is False
+            then:
+              - action: utter_stop_cancellation
+                next: END
+          - else: proceed_cancellation
+      - id: proceed_cancellation
+        action: get_fare_rules
       - action: utter_general_fare_rules
       - action: calculate_cancellation_fee
       - action: check_loyalty_status
       - action: utter_loyalty_rebate
       - action: apply_loyalty_discount
       - action: utter_refund_details
-#      - collect: user_confirmation
-#        next:
-#          - if: slots.user_confirmation is True
-#            then:
-#              - action: process_refund
-#            else:
-#              - action: utter_not_cancelled
+      - collect: confirm_cancellation
+        description: user confirmation on whether they accept the refund conditions and want to go ahead with the cancellation.
+        next:
+          - if: slots.confirm_cancellation is True
+            then:
+              - action: utter_booking_cancelled
+                next: END
+          - else:
+              - action: utter_stop_cancellation
+                next: END
+
 
 
